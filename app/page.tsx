@@ -1,4 +1,10 @@
-import { Google, SignUpForm, UserInfo } from "@niledatabase/react";
+import {
+  Google,
+  LinkedIn,
+  SignOutButton,
+  SignUpForm,
+  UserInfo,
+} from "@niledatabase/react";
 import "@niledatabase/react/styles.css";
 import { nile } from "./api/[...nile]/nile";
 import { headers as nextHeaders } from "next/headers";
@@ -12,7 +18,9 @@ export default async function Home() {
     <div className="h-screen w-screen flex items-center justify-center flex-col gap-5">
       {me instanceof Response ? null : <UserInfo user={me} />}
       <Google />
+      <LinkedIn />
       <SignUpForm callbackUrl="/dashboard" />
+      <SignOutButton />
     </div>
   );
 }
