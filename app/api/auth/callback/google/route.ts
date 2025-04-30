@@ -1,25 +1,16 @@
 import { NextRequest } from "next/server";
-import { nile, handlers } from "../../../[...nile]/nile";
+import {
+  handlersWithContext,
+  nile as globalNile,
+} from "../../../[...nile]/nile";
+import { User } from "@niledatabase/server";
 
 export async function GET(req: NextRequest) {
-  const postHandled = await handlers.GET(req);
-
-  console.log("the handled post");
-  if (postHandled) {
-    const setCookie = postHandled.headers.getSetCookie();
-    console.log(setCookie, "is this my cookie?");
-    const hasSession = setCookie.filter((c) =>
-      c.includes("nile.session-token")
-    );
-    console.log(hasSession);
-    if (hasSession) {
-      nile.api.headers = new Headers({ cookie: hasSession.toString() });
-      console.log(hasSession, nile.api.headers, "what is this");
-      const me = await nile.api.users.me();
-      if ("id" in me) {
-        console.log(me);
-      }
-    }
-  }
-  return postHandled;
+  const { response, nile } = await handlersWithContext.GET(req);
+  const me = await nile.api.users.me<User>();
+  // add user to tenant or something
+  globalNile.db.query("insert into todos... ");
+  nile.tenantId = me.tenants[0].id;
+  nile.db.query("select * from todos;");
+  return response;
 }
