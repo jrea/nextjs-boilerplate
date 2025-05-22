@@ -1,0 +1,81 @@
+"use client";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import "@niledatabase/react/styles.css";
+import { useForm } from "react-hook-form";
+import { Input } from "@/components/ui/input";
+import { login } from "./loginAction";
+import { useActionState } from "react";
+import Link from "next/link";
+import { SignOutButton, UserInfo } from "@niledatabase/react";
+import { User } from "@niledatabase/server";
+
+export default function CustomLoginForm({ user }: { user: void | User }) {
+  const form = useForm({
+    defaultValues: {
+      email: "guy@guy.com",
+      password: "guy@guy.com",
+    },
+  });
+  const [state, formAction, pending] = useActionState(login, {
+    message: "",
+    user,
+  });
+
+  return (
+    <div className="container mx-auto pt-40 flex gap-20 flex-col max-w-3xl">
+      <h1 className="text-4xl">Sign in</h1>
+      <Form {...form}>
+        {state.user ? <UserInfo user={state?.user} /> : null}
+        <form action={formAction} className="flex flex-col gap-3">
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="Email" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your public display name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Username</FormLabel>
+                <FormControl>
+                  <Input placeholder="Password" type="password" {...field} />
+                </FormControl>
+                <FormDescription>
+                  This is your public display name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {state?.message}
+          <div className="flex flex-row gap-2">
+            <Button type="submit" size="lg" disabled={pending}>
+              Sign in
+            </Button>
+          </div>
+        </form>
+      </Form>
+    </div>
+  );
+}

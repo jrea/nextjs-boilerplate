@@ -1,9 +1,12 @@
 "use server";
-import { User } from "@niledatabase/server";
+import { parse, splitCookiesString } from "set-cookie-parser";
 import { nile } from "../api/[...nile]/nile";
 import { headers as nextHeaders } from "next/headers";
+import { cookies as nextCookies } from "next/headers";
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { parseToken, User } from "@niledatabase/server";
 
-export async function login(formData: FormData) {
+export async function login(prevState: any, formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
   if (
@@ -15,36 +18,48 @@ export async function login(formData: FormData) {
     throw new Error("Email and password are required");
   }
   const headerList = await nextHeaders();
-  nile.api.headers = headerList;
+  nile.setContext(headerList);
 
-  const nileResponse = await nile.api.login(
+  const nileResponse = await nile.auth.signIn(
+    "credentials",
     {
       email,
       password,
     },
-    {
-      returnResponse: true,
-    }
+    true
   );
 
   // Login and get Set-Cookie from Nile
   if (!nileResponse || !(nileResponse instanceof Response)) {
     throw new Error("Invalid response from Nile");
   }
-  const setCookie = nileResponse.headers.get("set-cookie");
-  if (!setCookie) {
-    throw new Error("Invalid response from Nile");
-  }
-  const [, token] =
-    /((__Secure-)?nile\.session-token=.+?);/.exec(setCookie) ?? [];
+
+  const token = parseToken(nileResponse.headers);
   if (!token) {
     throw new Error("No Nile session cookie found");
   }
 
-  // nile.api.headers = new Headers({ cookie: token });
+  const user: User | Response = await nile.users.getSelf();
 
-  const user: User | Response = await nile.api.users.me();
   if (!user || user instanceof Response) {
     throw new Error("User not found");
   }
+  // holy crap nextjs. this is terrible.
+  const cooks = await nextCookies();
+  const browserCookies = parse(
+    splitCookiesString(nileResponse.headers.get("set-cookie") as string)
+  );
+  console.log(nileResponse.headers.get("set-cookie"));
+  console.log(browserCookies);
+  if (browserCookies) {
+    for (const parsed of browserCookies) {
+      cooks.set(
+        parsed.name as string,
+        parsed.value as string,
+        parsed as Partial<ResponseCookie>
+      );
+    }
+  }
+
+  return { message: "Login successful", user };
 }

@@ -1,6 +1,6 @@
 import { Nile } from "@niledatabase/server";
 
-export const nile = await Nile({
+export const nile = Nile({
   debug: true,
 });
-export const { handlers, handlersWithContext } = nile.api;
+export const { handlers } = nile;

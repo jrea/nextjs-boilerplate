@@ -18,6 +18,7 @@ export default function InteractiveSignIn() {
           {msg.msg}
         </div>
         <SignUpForm
+          createTenant
           redirect={false}
           onError={(e) => {
             setMsg({ kind: "error", msg: e.message });
