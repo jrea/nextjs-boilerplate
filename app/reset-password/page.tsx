@@ -37,7 +37,7 @@ export default async function ResetPassword() {
           <ResetPasswordClientSide
             email={"email" in me ? String(me?.email) : ""}
           />
-          <Code file="appResetPasswordClient" />
+          <Code file="app/reset-password/client.tsx" />
         </TabsContent>
         <TabsContent value="server">
           <ResetPasswordServer />

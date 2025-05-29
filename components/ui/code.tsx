@@ -26,11 +26,16 @@ export default async function Code({
     header = snippets[id].file;
   } else {
     const id: SnippetID = camel(file) as SnippetID;
-    if (!text) {
-      text = snippets[id].code;
-    }
-    if (!header) {
-      header = snippets[id].file;
+
+    if (snippets[id]) {
+      if (!text) {
+        text = snippets[id].code;
+      }
+      if (!header) {
+        header = snippets[id].file;
+      }
+    } else {
+      console.log("wtf is this", id, Object.keys(snippets), snippets[id]);
     }
   }
 
@@ -47,9 +52,13 @@ export default async function Code({
   );
 }
 
-// Converts kebab-case or file-like strings to camelCase
-export function camel(input: string) {
+// keep in sync with generate-snippets, its just regular js
+function camel(input: string) {
   return input
-    .replace(/[-_]+(.)/g, (_, chr) => chr.toUpperCase())
-    .replace(/^[A-Z]/, (m) => m.toLowerCase());
+    .replace(/\.(ts|tsx)$/, "") // remove .ts extension
+    .replace(/\[\.{3}(.*?)\]/g, "Ellipsis$1") // turn `[...name]` into `EllipsisName`
+    .replace(/[^a-zA-Z0-9]/g, "-") // normalize other symbols to dash
+    .replace(/[-_]+(.)/g, (_, chr) => chr.toUpperCase()) // camelCase from dash
+    .replace(/^[^a-zA-Z]+/, "") // remove invalid starting chars
+    .replace(/^[A-Z]/, (m) => m.toLowerCase()); // lowercase first char
 }
