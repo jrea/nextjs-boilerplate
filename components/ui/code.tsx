@@ -1,8 +1,6 @@
 import "server-only";
-
-import { readFile } from "node:fs/promises";
+import fs from "fs";
 import path from "node:path";
-// Using ES6 import syntax
 import hljs from "highlight.js/lib/core";
 import ts from "highlight.js/lib/languages/typescript";
 import "highlight.js/styles/gradient-dark.css";
@@ -20,8 +18,8 @@ export default async function Code({
 }) {
   let text = code ?? "";
   if (!text) {
-    const filePath = path.resolve(process.cwd(), file); // Adjust path if needed
-    text = await readFile(filePath, "utf-8");
+    const filePath = path.join(process.cwd(), file);
+    text = fs.readFileSync(filePath, "utf8");
   }
   const highlightedCode = hljs.highlight(text, {
     language: "typescript",
