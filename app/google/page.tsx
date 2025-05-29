@@ -79,7 +79,7 @@ type Todo = {
   id: string;
   tenantId: string;
 };
-export const columns: ColumnDef<Todo>[] = [
+const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: "title",
     header: "Title",
