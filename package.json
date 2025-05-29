@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate:snippets": "yarn scripts/generate-snippets.mjs",
+    "generate:snippets": "yarn ./scripts/generate-snippets.mjs",
     "dev": "next dev",
     "build": "yarn generate:snippets && next build",
     "preinstall": "yarn generate:snippets",
