@@ -1,13 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { getCsrfToken, signIn } from "@niledatabase/react";
-import { useEffect, useMemo } from "react";
+import { signIn } from "@niledatabase/react";
 
 export default function GoogleManualButton() {
-  useEffect(() => {
-    // get the CSRF token when we mount, we need this to sign in.
-    getCsrfToken(`${window.location.href}/csrf`);
-  }, []);
   return (
     <Button
       size="lg"
@@ -16,10 +11,10 @@ export default function GoogleManualButton() {
         // because this button is rended on the `/google-manual` route and we want it to work for all hosts
         // we use the window location
         signIn("google", {
-          fetchUrl: `${window.location.href}/sso`,
-          providersUrl: `${window.location.href}/providers`,
-          csrfUrl: `${window.location.href}/csrf`,
-          callbackUrl: "/google-manual",
+          fetchUrl: `/google-manual/sso`,
+          providersUrl: `/google-manual/providers`,
+          csrfUrl: `/google-manual/csrf`,
+          callbackUrl: "/google-manual?success=true",
         });
       }}
     >

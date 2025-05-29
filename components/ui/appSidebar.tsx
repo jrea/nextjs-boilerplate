@@ -49,6 +49,11 @@ const items = [
     url: "/google-manual",
     icon: Info,
   },
+  {
+    title: "Reset password",
+    url: "/reset-password",
+    icon: Info,
+  },
 ];
 
 export function AppSidebar() {

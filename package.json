@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
-    "@niledatabase/react": "^4.2.0-alpha.3",
-    "@niledatabase/server": "^4.2.0-alpha.3",
+    "@niledatabase/react": "^5.0.0-alpha.2",
+    "@niledatabase/server": "^5.0.0-alpha.2",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-label": "^2.1.3",
     "@radix-ui/react-separator": "^1.1.7",
@@ -43,9 +43,5 @@
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "packageManager": "yarn@4.8.1",
-  "resolutions": {
-    "@niledatabase/server": "portal:/Users/josephrea/nile/nile-js/packages/server",
-    "@niledatabase/react": "portal:/Users/josephrea/nile/nile-js/packages/react"
-  }
+  "packageManager": "yarn@4.8.1"
 }

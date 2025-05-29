@@ -1,16 +1,18 @@
 import Code from "@/components/ui/code";
 import GoogleManualButton from "./loginButton";
-import { nile } from "./localizedNile";
-import { SignOutButton } from "@niledatabase/react";
-import { headers } from "next/headers";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { redirect } from "next/navigation";
+import { UserInfo } from "@niledatabase/react";
 
-export default async function GoogleManual() {
+export default async function GoogleManual({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string }>;
+}) {
   return (
     <div className="container mx-auto pt-40 px-10">
       <div className="flex flex-col gap-10">
         <div className="text-7xl">Custom Google SSO implementation</div>
+        {(await searchParams).success ? <UserInfo /> : null}
         <div>
           On this page, we are going to walk through the steps to log a user in
           via google SSO without a framework. Normally you would this up using

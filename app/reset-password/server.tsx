@@ -1,0 +1,42 @@
+import { UserInfo } from "@niledatabase/react";
+import { nile } from "../api/[...nile]/nile";
+import { User } from "@niledatabase/server";
+import { headers } from "next/headers";
+import { PasswordResetForm } from "./resetForm";
+
+interface ResetResponse {
+  ok: boolean;
+  message?: string;
+}
+
+export default async function ResetPasswordServer() {
+  nile.setContext(await headers());
+  const me = await nile.users.getSelf<User>();
+
+  async function resetPassword(
+    _: unknown,
+    formData: FormData
+  ): Promise<ResetResponse> {
+    "use server";
+
+    const password = formData.get("password") as string;
+    const response = await nile.auth.resetPassword({
+      email: me.email,
+      password,
+    });
+
+    if (response.ok) {
+      return { ok: true, message: "Password reset" };
+    }
+
+    const message = await response.text();
+    return { ok: false, message };
+  }
+
+  return (
+    <div className="w-2xl mx-auto p-10">
+      <UserInfo user={me} />
+      <PasswordResetForm action={resetPassword} />
+    </div>
+  );
+}

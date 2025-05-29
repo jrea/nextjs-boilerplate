@@ -1,0 +1,82 @@
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ResetPasswordClientSide from "./client";
+import Code from "@/components/ui/code";
+import ResetPasswordServer from "./server";
+import { nile } from "../google-manual/localizedNile";
+import { headers } from "next/headers";
+import ResetFormRequest from "./resetFormRequest";
+
+export default async function ResetPassword() {
+  nile.setContext(await headers());
+  const me = await nile.users.getSelf();
+  return (
+    <div className="container mx-auto p-10 flex flex-col gap-2">
+      <div className="text-7xl">Reset password</div>
+      <div>There are two reasons to reset a password</div>
+      <div>1. You want to change it</div>
+      <div>2. You forgot what it is</div>
+      <div>
+        Lets assume the (easier) case first, and you are a user who is logged in
+        and you want to reset your password. This form assumes you are logged in
+        (which means you knew your old password...) and you want to update it.
+        This will make a few REST calls to the routes in order to reset your
+        password. It will generate a new verification token, verify that it is
+        accurate, then update the password. It is possible to do this with a
+        single call, but all roads lead through the routes.
+      </div>
+      <div>
+        For the client component below, we 100% use all client side fetching.
+        For the server component, we are using an action to do the same thing
+      </div>
+      <Tabs defaultValue="server">
+        <TabsList className="w-full">
+          <TabsTrigger value="client">Client</TabsTrigger>
+          <TabsTrigger value="server">Server</TabsTrigger>
+        </TabsList>
+        <TabsContent value="client">
+          <ResetPasswordClientSide
+            email={"email" in me ? String(me?.email) : ""}
+          />
+          <Code file="app/reset-password/client.tsx" />
+        </TabsContent>
+        <TabsContent value="server">
+          <ResetPasswordServer />
+          <div className="flex flex-row justify-between">
+            <Code file="app/reset-password/server.tsx" />
+            <Code file="app/reset-password/resetForm.tsx" />
+          </div>
+        </TabsContent>
+      </Tabs>
+      <div className="text-7xl">Forgot password</div>
+      <div>
+        Forgot password is more complicated, because you can no longer assume
+        that a user is logged in (in fact, we must assume they are malicious)
+      </div>
+      <div>
+        Because of that, we *must* send an email to the user, so SMTP (mailgun,
+        sendgrid, etc) shall (thanks legalese) be configured in order for that
+        to work. As a warning, submitting the values in thsi form maybe sends
+        emails. Maybe it does not. At the time of writing, it sure does, but who
+        knows when you're reading this.
+      </div>
+      <div>We do the same thing here. Once with routes, and once without</div>
+      <Tabs defaultValue="server">
+        <TabsList className="w-full">
+          <TabsTrigger value="client">Client</TabsTrigger>
+          <TabsTrigger value="server">Server</TabsTrigger>
+        </TabsList>
+        <TabsContent value="client">
+          <ResetFormRequest />
+          <Code file="app/reset-password/resetFormRequest.tsx" />
+        </TabsContent>
+        <TabsContent value="server">
+          <ResetPasswordServer />
+          <div className="flex flex-row justify-between">
+            <Code file="app/reset-password/server.tsx" />
+            <Code file="app/reset-password/resetForm.tsx" />
+          </div>
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+}
