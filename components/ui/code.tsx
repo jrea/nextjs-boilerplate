@@ -2,6 +2,8 @@ import "server-only";
 import { snippets } from "@/components/snippets";
 import hljs from "highlight.js/lib/core";
 import ts from "highlight.js/lib/languages/typescript";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import "highlight.js/styles/gradient-dark.css";
 
 type SnippetID = keyof typeof snippets;
@@ -24,7 +26,7 @@ export default async function Code({
   if (id) {
     text = snippets[id].code;
     header = snippets[id].file;
-  } else {
+  } else if (process.env.NODE_ENV === "production") {
     const id: SnippetID = camel(file) as SnippetID;
 
     if (snippets[id]) {
@@ -35,8 +37,16 @@ export default async function Code({
         header = snippets[id].file;
       }
     } else {
-      console.log("wtf is this", id, Object.keys(snippets), snippets[id]);
+      console.error(
+        "missing template",
+        id,
+        Object.keys(snippets),
+        snippets[id]
+      );
     }
+  } else {
+    const filePath = path.resolve(process.cwd(), file);
+    text = await readFile(filePath, "utf-8");
   }
 
   const highlightedCode = hljs.highlight(text, {

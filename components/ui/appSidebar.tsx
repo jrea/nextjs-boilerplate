@@ -54,6 +54,11 @@ const items = [
     url: "/reset-password",
     icon: Info,
   },
+  {
+    title: "Forgot password",
+    url: "/forgot-password",
+    icon: Info,
+  },
 ];
 
 export function AppSidebar() {

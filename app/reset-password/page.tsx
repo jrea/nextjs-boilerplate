@@ -4,7 +4,6 @@ import Code from "@/components/ui/code";
 import ResetPasswordServer from "./server";
 import { nile } from "../google-manual/localizedNile";
 import { headers } from "next/headers";
-import ResetFormRequest from "./resetFormRequest";
 
 export default async function ResetPassword() {
   nile.setContext(await headers());
@@ -28,6 +27,11 @@ export default async function ResetPassword() {
         For the client component below, we 100% use all client side fetching.
         For the server component, we are using an action to do the same thing
       </div>
+      {me instanceof Response ? (
+        <div className="text-2xl text-red-600 py-20">
+          You are not signed in. You must be signed in to reset your password
+        </div>
+      ) : null}
       <Tabs defaultValue="server">
         <TabsList className="w-full">
           <TabsTrigger value="client">Client</TabsTrigger>
@@ -38,36 +42,6 @@ export default async function ResetPassword() {
             email={"email" in me ? String(me?.email) : ""}
           />
           <Code file="app/reset-password/client.tsx" />
-        </TabsContent>
-        <TabsContent value="server">
-          <ResetPasswordServer />
-          <div className="flex flex-row justify-between">
-            <Code file="app/reset-password/server.tsx" />
-            <Code file="app/reset-password/resetForm.tsx" />
-          </div>
-        </TabsContent>
-      </Tabs>
-      <div className="text-7xl">Forgot password</div>
-      <div>
-        Forgot password is more complicated, because you can no longer assume
-        that a user is logged in (in fact, we must assume they are malicious)
-      </div>
-      <div>
-        Because of that, we *must* send an email to the user, so SMTP (mailgun,
-        sendgrid, etc) shall (thanks legalese) be configured in order for that
-        to work. As a warning, submitting the values in thsi form maybe sends
-        emails. Maybe it does not. At the time of writing, it sure does, but who
-        knows when you're reading this.
-      </div>
-      <div>We do the same thing here. Once with routes, and once without</div>
-      <Tabs defaultValue="server">
-        <TabsList className="w-full">
-          <TabsTrigger value="client">Client</TabsTrigger>
-          <TabsTrigger value="server">Server</TabsTrigger>
-        </TabsList>
-        <TabsContent value="client">
-          <ResetFormRequest />
-          <Code file="app/reset-password/resetFormRequest.tsx" />
         </TabsContent>
         <TabsContent value="server">
           <ResetPasswordServer />

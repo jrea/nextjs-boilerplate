@@ -11,8 +11,11 @@ interface ResetResponse {
 
 export default async function ResetPasswordServer() {
   nile.setContext(await headers());
-  const me = await nile.users.getSelf<User>();
+  const me = await nile.users.getSelf<User | Response>();
 
+  if (me instanceof Response) {
+    return null;
+  }
   async function resetPassword(
     _: unknown,
     formData: FormData
@@ -20,6 +23,9 @@ export default async function ResetPasswordServer() {
     "use server";
 
     const password = formData.get("password") as string;
+    if (me instanceof Response) {
+      return { ok: false, message: "You are not logged in." };
+    }
     const response = await nile.auth.resetPassword({
       email: me.email,
       password,
