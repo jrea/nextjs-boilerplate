@@ -6,7 +6,7 @@ export const nile = new Server({
   debug: true,
   routePrefix: "/google-manual",
   // we also need to tell nile-auth about the origin of our FE, so it goes to the right place.
-  origin: process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
+  origin: process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000",
 });
