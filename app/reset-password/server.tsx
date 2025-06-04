@@ -4,10 +4,10 @@ import { User } from "@niledatabase/server";
 import { headers } from "next/headers";
 import { PasswordResetForm } from "./resetForm";
 
-interface ResetResponse {
+type ServerResponse = {
   ok: boolean;
   message?: string;
-}
+};
 
 export default async function ResetPasswordServer() {
   nile.setContext(await headers());
@@ -19,7 +19,7 @@ export default async function ResetPasswordServer() {
   async function resetPassword(
     _: unknown,
     formData: FormData
-  ): Promise<ResetResponse> {
+  ): Promise<ServerResponse> {
     "use server";
 
     const password = formData.get("password") as string;

@@ -59,6 +59,11 @@ const items = [
     url: "/forgot-password",
     icon: Info,
   },
+  {
+    title: "Invites",
+    url: "/invites",
+    icon: Info,
+  },
 ];
 
 export function AppSidebar() {
