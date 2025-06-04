@@ -75,7 +75,7 @@ async function createTenant(
   const name = formData.get("tenantName") as string;
   const placeholder = formData.get("placeholder") as string;
   const tenant = name ? name : placeholder;
-  const response = await nile.tenants.create(tenant, true);
+  const response = await nile.tenants.create<Response>(tenant, true);
 
   if (response.ok) {
     return { ok: true, message: "Password reset" };
