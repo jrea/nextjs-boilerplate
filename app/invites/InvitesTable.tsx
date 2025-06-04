@@ -1,9 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Invite } from "@niledatabase/server";
+// import { Invite } from "@niledatabase/server";
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTable } from "./InviteUserTable";
-import { deleteInvite, resend } from "./actions";
+import { deleteInvite, Invite, resend } from "./actions";
 
 const columns: ColumnDef<Invite>[] = [
   { accessorKey: "identifier", header: "Email" },

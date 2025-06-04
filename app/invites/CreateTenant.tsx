@@ -1,14 +1,14 @@
 import { headers } from "next/headers";
 import { nile } from "../api/[...nile]/nile";
-import { Invite, Tenant, User } from "@niledatabase/server";
+import { Tenant, User } from "@niledatabase/server";
 import { Google, UserInfo } from "@niledatabase/react";
 import { CreateTenantForm } from "./CreateTenantForm";
 import { tenantPlaceholder } from "./placeholderNames";
 import { DataTable } from "./InviteUserTable";
 import { ColumnDef } from "@tanstack/react-table";
 import { InviteUserToTenant } from "./InviteUserToTenant";
-import { Button } from "@/components/ui/button";
 import InvitesTable from "./InvitesTable";
+import { Invite } from "./actions";
 
 type ServerResponse = {
   ok: boolean;
@@ -30,7 +30,7 @@ export default async function CreateTenant() {
     );
   }
   nile.setContext({ tenantId: me.tenants[0] });
-  const invites = await nile.tenants.invites();
+  // const invites = await nile.tenants.invites();
   const users = await nile.tenants.users();
 
   return (
@@ -49,7 +49,7 @@ export default async function CreateTenant() {
         <div>
           <div className="text-2xl font-bold">Pending invites</div>
           <InviteUserToTenant action={inviteUser} />
-          <InvitesTable invites={invites instanceof Response ? [] : invites} />
+          {/* <InvitesTable invites={invites instanceof Response ? [] : invites} /> */}
         </div>
         <div>
           <div className="text-2xl font-bold">Org members</div>

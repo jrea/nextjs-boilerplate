@@ -1,8 +1,9 @@
 "use server";
 
 import { headers } from "next/headers";
-import { nile } from "../google-manual/localizedNile";
-import { Invite } from "@niledatabase/server";
+import { nile } from "../api/[...nile]/nile";
+export type Invite = any;
+// import { Invite } from "@niledatabase/server";
 
 export async function resend(invite: Invite) {
   nile.setContext(await headers());
