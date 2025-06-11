@@ -1,12 +1,12 @@
 import {
-  Calendar,
+  ArrowBigRight,
+  ArrowBigRightDash,
   Home,
-  Inbox,
-  Info,
+  Key,
   LogIn,
-  Search,
-  Settings,
-  User,
+  MailCheck,
+  MailPlus,
+  RotateCcw,
 } from "lucide-react";
 
 import {
@@ -42,27 +42,32 @@ const items = [
   {
     title: "Google (NextJS)",
     url: "/google",
-    icon: Info,
+    icon: ArrowBigRightDash,
   },
   {
     title: "Google (manual)",
     url: "/google-manual",
-    icon: Info,
+    icon: ArrowBigRight,
   },
   {
     title: "Reset password",
     url: "/reset-password",
-    icon: Info,
+    icon: RotateCcw,
   },
   {
     title: "Forgot password",
     url: "/forgot-password",
-    icon: Info,
+    icon: Key,
   },
   {
-    title: "Invites",
+    title: "Invites (manual)",
     url: "/invites",
-    icon: Info,
+    icon: MailPlus,
+  },
+  {
+    title: "Verify email (manual)",
+    url: "/verify-email",
+    icon: MailCheck,
   },
 ];
 

@@ -29,7 +29,6 @@ export async function GET(req: NextRequest) {
       newHeaders.set("set-cookie", ssoClearingHeaders);
     }
 
-    console.log(newHeaders, ssoClearingHeaders);
     return new Response(null, {
       status: 302,
       headers: newHeaders,

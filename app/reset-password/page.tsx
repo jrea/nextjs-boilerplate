@@ -3,10 +3,8 @@ import ResetPasswordClientSide from "./client";
 import Code from "@/components/ui/code";
 import ResetPasswordServer from "./server";
 import { nile } from "../google-manual/localizedNile";
-import { headers } from "next/headers";
 
 export default async function ResetPassword() {
-  nile.setContext(await headers());
   const me = await nile.users.getSelf();
   return (
     <div className="container mx-auto p-10 flex flex-col gap-2">

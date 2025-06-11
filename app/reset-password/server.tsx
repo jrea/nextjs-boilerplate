@@ -10,7 +10,6 @@ type ServerResponse = {
 };
 
 export default async function ResetPasswordServer() {
-  nile.setContext(await headers());
   const me = await nile.users.getSelf<User | Response>();
 
   if (me instanceof Response) {

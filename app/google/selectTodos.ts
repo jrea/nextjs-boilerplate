@@ -1,9 +1,6 @@
-import { headers } from "next/headers";
 import { nile } from "../api/[...nile]/nile";
 
 export default async function selectTodos() {
-  const h = await headers();
-  nile.setContext(Object.fromEntries(h.entries()));
   const loggedIn = await nile.auth.getSession();
   return loggedIn ? await nile.db.query("select * from todos2") : { rows: [] };
   /* 

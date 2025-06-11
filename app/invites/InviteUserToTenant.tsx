@@ -32,7 +32,7 @@ export function InviteUserToTenant({ action }: Props) {
           placeholder="Invite user eg, user@example.com"
         />
         <Button type="submit" disabled={isPending}>
-          {isPending ? "Adding..." : "Add user to tenant"}
+          {isPending ? "Sending mail..." : "Invite user"}
         </Button>
       </div>
       {state?.message && (

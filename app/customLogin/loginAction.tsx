@@ -1,7 +1,6 @@
 "use server";
 import { parse, splitCookiesString } from "set-cookie-parser";
 import { nile } from "../api/[...nile]/nile";
-import { headers as nextHeaders } from "next/headers";
 import { cookies as nextCookies } from "next/headers";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { parseToken, User } from "@niledatabase/server";
@@ -17,8 +16,6 @@ export async function login(prevState: any, formData: FormData) {
   ) {
     throw new Error("Email and password are required");
   }
-  const headerList = await nextHeaders();
-  nile.setContext(headerList);
 
   const nileResponse = await nile.auth.signIn(
     "credentials",
@@ -49,8 +46,6 @@ export async function login(prevState: any, formData: FormData) {
   const browserCookies = parse(
     splitCookiesString(nileResponse.headers.get("set-cookie") as string)
   );
-  console.log(nileResponse.headers.get("set-cookie"));
-  console.log(browserCookies);
   if (browserCookies) {
     for (const parsed of browserCookies) {
       cooks.set(

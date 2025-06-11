@@ -446,19 +446,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@niledatabase/client@npm:5.0.0-alpha.2":
-  version: 5.0.0-alpha.2
-  resolution: "@niledatabase/client@npm:5.0.0-alpha.2"
-  checksum: 10c0/cbb4a7792534904f0947710ac82736b826c67c59ca3dd8b721c30e581000906e1e1477fa68a116d5ed7d8848dc4da761c69d5241aaf0cc527d6e5ca65d1a19ec
+"@niledatabase/client@npm:5.0.0-alpha.7":
+  version: 5.0.0-alpha.7
+  resolution: "@niledatabase/client@npm:5.0.0-alpha.7"
+  checksum: 10c0/e6e884a41106ac39dbd5bbc9db38fe4ffa4e0f80a4223ee0c2cfb8f941c987f498414907917aef9e43b62280b3ffa64a364921108582c0983f4df332a5928101
   languageName: node
   linkType: hard
 
-"@niledatabase/react@npm:^5.0.0-alpha.2":
-  version: 5.0.0-alpha.2
-  resolution: "@niledatabase/react@npm:5.0.0-alpha.2"
+"@niledatabase/nextjs@npm:^5.0.0-alpha.7":
+  version: 5.0.0-alpha.7
+  resolution: "@niledatabase/nextjs@npm:5.0.0-alpha.7"
+  peerDependencies:
+    "@niledatabase/server": "*"
+    next: ^15
+  checksum: 10c0/49a378596a7cccb4ddb2d4c8370b9b457324acdf442f61a24d63227e6fc3d171b3a713805fd814ad5a631a3db3d840cd179761623930925f9ba87a23b799e9c2
+  languageName: node
+  linkType: hard
+
+"@niledatabase/react@npm:^5.0.0-alpha.7":
+  version: 5.0.0-alpha.7
+  resolution: "@niledatabase/react@npm:5.0.0-alpha.7"
   dependencies:
     "@hookform/resolvers": "npm:^5.0.1"
-    "@niledatabase/client": "npm:5.0.0-alpha.2"
+    "@niledatabase/client": "npm:5.0.0-alpha.7"
     "@radix-ui/react-dialog": "npm:^1.1.14"
     "@radix-ui/react-dropdown-menu": "npm:^2.1.6"
     "@radix-ui/react-label": "npm:^2.1.3"
@@ -474,18 +484,17 @@ __metadata:
     "@tanstack/react-query": ^5.23.0
     react: ^19.0.0
     react-dom: ^19.0.0
-  checksum: 10c0/adaaf384e15617e9304fa89ec5778e6031efe662fed4f0e299d0322512d2e3cfda7ee4f6e1715166028ade5083532cc407aa8c4f0cb32178b6fa27a67b1830cf
+  checksum: 10c0/82d74716bae737cbefc7150a999cad53d4c624dbe3c27acdd9614d51676aafb4b48fdafb739effea1eee46b433209ce31d5033200ad3277d878cb4a93b9ad6d1
   languageName: node
   linkType: hard
 
-"@niledatabase/server@npm:^5.0.0-alpha.2":
-  version: 5.0.0-alpha.2
-  resolution: "@niledatabase/server@npm:5.0.0-alpha.2"
+"@niledatabase/server@npm:^5.0.0-alpha.7":
+  version: 5.0.0-alpha.7
+  resolution: "@niledatabase/server@npm:5.0.0-alpha.7"
   dependencies:
     dotenv: "npm:^16.4.5"
-    h3: "npm:^1.15.1"
     pg: "npm:^8.11.3"
-  checksum: 10c0/2eacb6cceeb2a89e790ccc4a7784e95004dcdc5fc207dca85c1db049266a34be8584e4ad4d317ca53fd04dadcf6acc6756c1974b42816d855014f4bc2d977a63
+  checksum: 10c0/16c510b7961f21d7230b0d20ea1caf76ce2267bbd6338338be52211625c66cae977205ab05d0cee173acb3fd5e66b732b17fea28a750769035982a9d84d93f11
   languageName: node
   linkType: hard
 
@@ -1562,13 +1571,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie-es@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "cookie-es@npm:1.2.2"
-  checksum: 10c0/210eb67cd40a53986fda99d6f47118cfc45a69c4abc03490d15ab1b83ac978d5518356aecdd7a7a4969292445e3063c2302deda4c73706a67edc008127608638
-  languageName: node
-  linkType: hard
-
 "cookie@npm:^1.0.2":
   version: 1.0.2
   resolution: "cookie@npm:1.0.2"
@@ -1594,33 +1596,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crossws@npm:^0.3.4":
-  version: 0.3.5
-  resolution: "crossws@npm:0.3.5"
-  dependencies:
-    uncrypto: "npm:^0.1.3"
-  checksum: 10c0/9e873546f0806606c4f775219f6811768fc3b3b0765ca8230722e849058ad098318af006e1faa39a8008c03009c37c519f6bccad41b0d78586237585c75fb38b
-  languageName: node
-  linkType: hard
-
 "csstype@npm:^3.0.2":
   version: 3.1.3
   resolution: "csstype@npm:3.1.3"
   checksum: 10c0/80c089d6f7e0c5b2bd83cf0539ab41474198579584fa10d86d0cafe0642202343cbc119e076a0b1aece191989477081415d66c9fefbf3c957fc2fc4b7009f248
-  languageName: node
-  linkType: hard
-
-"defu@npm:^6.1.4":
-  version: 6.1.4
-  resolution: "defu@npm:6.1.4"
-  checksum: 10c0/2d6cc366262dc0cb8096e429368e44052fdf43ed48e53ad84cc7c9407f890301aa5fcb80d0995abaaf842b3949f154d060be4160f7a46cb2bc2f7726c81526f5
-  languageName: node
-  linkType: hard
-
-"destr@npm:^2.0.5":
-  version: 2.0.5
-  resolution: "destr@npm:2.0.5"
-  checksum: 10c0/efabffe7312a45ad90d79975376be958c50069f1156b94c181199763a7f971e113bd92227c26b94a169c71ca7dbc13583b7e96e5164743969fc79e1ff153e646
   languageName: node
   linkType: hard
 
@@ -1723,34 +1702,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"h3@npm:^1.15.1":
-  version: 1.15.3
-  resolution: "h3@npm:1.15.3"
-  dependencies:
-    cookie-es: "npm:^1.2.2"
-    crossws: "npm:^0.3.4"
-    defu: "npm:^6.1.4"
-    destr: "npm:^2.0.5"
-    iron-webcrypto: "npm:^1.2.1"
-    node-mock-http: "npm:^1.0.0"
-    radix3: "npm:^1.1.2"
-    ufo: "npm:^1.6.1"
-    uncrypto: "npm:^0.1.3"
-  checksum: 10c0/4b83daceda6f39cd508d56382dc3a83ef14453d0119ada290c7fda3c69d907ccaf2547fd233f3e001a9ffae2cde4e2543e4361d714c29fb6ec664f604d5b84a3
-  languageName: node
-  linkType: hard
-
 "highlight.js@npm:^11.11.1":
   version: 11.11.1
   resolution: "highlight.js@npm:11.11.1"
   checksum: 10c0/40f53ac19dac079891fcefd5bd8a21cf2e8931fd47da5bd1dca73b7e4375c1defed0636fc39120c639b9c44119b7d110f7f0c15aa899557a5a1c8910f3c0144c
-  languageName: node
-  linkType: hard
-
-"iron-webcrypto@npm:^1.2.1":
-  version: 1.2.1
-  resolution: "iron-webcrypto@npm:1.2.1"
-  checksum: 10c0/5cf27c6e2bd3ef3b4970e486235fd82491ab8229e2ed0ac23307c28d6c80d721772a86ed4e9fe2a5cabadd710c2f024b706843b40561fb83f15afee58f809f66
   languageName: node
   linkType: hard
 
@@ -2044,8 +1999,9 @@ __metadata:
   resolution: "nextjs@workspace:."
   dependencies:
     "@hookform/resolvers": "npm:^5.0.1"
-    "@niledatabase/react": "npm:^5.0.0-alpha.2"
-    "@niledatabase/server": "npm:^5.0.0-alpha.2"
+    "@niledatabase/nextjs": "npm:^5.0.0-alpha.7"
+    "@niledatabase/react": "npm:^5.0.0-alpha.7"
+    "@niledatabase/server": "npm:^5.0.0-alpha.7"
     "@radix-ui/react-dialog": "npm:^1.1.14"
     "@radix-ui/react-label": "npm:^2.1.3"
     "@radix-ui/react-separator": "npm:^1.1.7"
@@ -2077,13 +2033,6 @@ __metadata:
     zod: "npm:^3.24.2"
   languageName: unknown
   linkType: soft
-
-"node-mock-http@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "node-mock-http@npm:1.0.0"
-  checksum: 10c0/cb3fd7c17e7043b87a8d7a9ef1dcd4e2cde312cd224716c5fb3a4b56b48607c257a2e7356e73262db60ebf9e17e23b7a9c5230785f630c6a437090bfd26dd242
-  languageName: node
-  linkType: hard
 
 "package-json-from-dist@npm:^1.0.0":
   version: 1.0.1
@@ -2246,13 +2195,6 @@ __metadata:
   dependencies:
     xtend: "npm:^4.0.0"
   checksum: 10c0/c1734c3cb79e7f22579af0b268a463b1fa1d084e742a02a7a290c4f041e349456f3bee3b4ee0bb3f226828597f7b76deb615c1b857db9a742c45520100456272
-  languageName: node
-  linkType: hard
-
-"radix3@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "radix3@npm:1.1.2"
-  checksum: 10c0/d4a295547f71af079868d2c2ed3814a9296ee026c5488212d58c106e6b4797c6eaec1259b46c9728913622f2240c9a944bfc8e2b3b5f6e4a5045338b1609f1e4
   languageName: node
   linkType: hard
 
@@ -2652,20 +2594,6 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 10c0/39117e346ff8ebd87ae1510b3a77d5d92dae5a89bde588c747d25da5c146603a99c8ee588c7ef80faaf123d89ed46f6dbd918d534d641083177d5fac38b8a1cb
-  languageName: node
-  linkType: hard
-
-"ufo@npm:^1.6.1":
-  version: 1.6.1
-  resolution: "ufo@npm:1.6.1"
-  checksum: 10c0/5a9f041e5945fba7c189d5410508cbcbefef80b253ed29aa2e1f8a2b86f4bd51af44ee18d4485e6d3468c92be9bf4a42e3a2b72dcaf27ce39ce947ec994f1e6b
-  languageName: node
-  linkType: hard
-
-"uncrypto@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "uncrypto@npm:0.1.3"
-  checksum: 10c0/74a29afefd76d5b77bedc983559ceb33f5bbc8dada84ff33755d1e3355da55a4e03a10e7ce717918c436b4dfafde1782e799ebaf2aadd775612b49f7b5b2998e
   languageName: node
   linkType: hard
 

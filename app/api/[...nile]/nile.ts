@@ -1,7 +1,8 @@
 import { Nile } from "@niledatabase/server";
+import { nextJs } from "@niledatabase/nextjs";
 
 export const nile = Nile({
   debug: true,
-  secureCookies: false,
+  extensions: [nextJs],
 });
 export const { handlers } = nile;
