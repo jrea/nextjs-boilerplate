@@ -8,6 +8,11 @@ import { inviteUser, setActiveTenant } from "./actions";
 import { cookies, headers } from "next/headers";
 
 export default async function TenantsAndTables({ me }: { me: User }) {
+  nile.setContext({ userId: me.id });
+  // do some extra context setting if we're new
+  if (!nile.getContext().tenantId) {
+    nile.setContext(me.tenants[0]);
+  }
   const [invites, users, tenants] = await Promise.all([
     nile.tenants.invites(),
     nile.tenants.users(),

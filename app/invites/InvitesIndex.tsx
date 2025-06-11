@@ -4,16 +4,11 @@ import TenantsAndTables from "./TenantsAndTables";
 import { nile } from "../api/[...nile]/nile";
 
 export default async function InvitesIndex() {
-  const me = await nile.users.getSelf<User>();
-  nile.setContext({ userId: me.id });
-  // do some extra context setting if we're new
-  if (!nile.getContext().tenantId) {
-    nile.setContext(me.tenants[0]);
-  }
+  const me = await nile.users.getSelf();
 
   return (
     <EnsureSignedIn me={me}>
-      <TenantsAndTables me={me as User} />
+      <TenantsAndTables me={me as unknown as User} />
     </EnsureSignedIn>
   );
 }
