@@ -16,7 +16,7 @@ export default async function TenantsAndTables({ me }: { me: User }) {
   const [invites, users, tenants] = await Promise.all([
     nile.tenants.invites(),
     nile.tenants.users(),
-    nile.tenants.list(),
+    nile.getContext().tenantId ? nile.tenants.list() : [],
   ]);
 
   return (
