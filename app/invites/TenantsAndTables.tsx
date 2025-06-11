@@ -11,6 +11,7 @@ export default async function TenantsAndTables({ me }: { me: User }) {
   nile.setContext({ userId: me.id });
   // do some extra context setting if we're new
   if (!nile.getContext().tenantId) {
+    console.log("setting the context of the tenant list to `me`");
     nile.setContext(me.tenants[0]);
   }
   const [invites, users, tenants] = await Promise.all([
