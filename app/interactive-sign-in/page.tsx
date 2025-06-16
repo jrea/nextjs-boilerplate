@@ -1,42 +1,16 @@
-"use client";
+import { revalidatePath } from "next/cache";
+import SignInSignOut from "./SignInSignOut";
 
-import { SignInForm, SignUpForm } from "@niledatabase/react";
-import { useState } from "react";
-
-export default function InteractiveSignIn() {
-  const [msg, setMsg] = useState({ kind: "", msg: "" });
+export default async function InteractiveSingIn() {
   return (
-    <div className="container mx-auto mt-56 flex justify-center">
-      <div className="w-3xl">
-        <div
-          className={`${
-            msg.kind === "error" ? "bg-red-900" : "bg-green-700"
-          } text-white p-2 rounded-lg ${
-            msg.msg ? "opacity-100" : "opacity-0"
-          } flex-1`}
-        >
-          {msg.msg}
-        </div>
-        <SignUpForm
-          createTenant
-          redirect={false}
-          onError={(e) => {
-            setMsg({ kind: "error", msg: e.message });
-          }}
-          onSuccess={(e) => {
-            setMsg({ kind: "success", msg: "Sign up success!" });
-          }}
-        />
-        <SignInForm
-          redirect={false}
-          onError={(e) => {
-            setMsg({ kind: "error", msg: e.message });
-          }}
-          onSuccess={(e) => {
-            setMsg({ kind: "success", msg: "Sign in success!" });
-          }}
-        />
-      </div>
+    <div className="mx-auto container p-10">
+      This page lets you sign up or sign as random users. Sign in automatically
+      creates the user and signs you in.
+      <SignInSignOut revalidate={revalidate} />
     </div>
   );
+}
+async function revalidate() {
+  "use server";
+  revalidatePath("/interactive-sign-in");
 }

@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { SignOutButton } from "@niledatabase/react";
+import { nile } from "@/app/api/[...nile]/nile";
+import { User } from "@niledatabase/server";
 
 // Menu items.
 const items = [
@@ -71,7 +73,8 @@ const items = [
   },
 ];
 
-export function AppSidebar() {
+export async function AppSidebar() {
+  const me = await nile.users.getSelf<User>();
   return (
     <Sidebar>
       <SidebarContent>
@@ -92,9 +95,14 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-        <SidebarGroup>
-          <SignOutButton />
-        </SidebarGroup>
+        {me instanceof Response ? null : (
+          <SidebarGroup>
+            <div className="opacity-60 text-sm mb-2">
+              Signed in as {me.email}
+            </div>
+            <SignOutButton />
+          </SidebarGroup>
+        )}
       </SidebarContent>
     </Sidebar>
   );

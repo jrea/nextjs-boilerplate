@@ -1,11 +1,18 @@
 "use server";
 import { parse, splitCookiesString } from "set-cookie-parser";
 import { nile } from "../api/[...nile]/nile";
-import { cookies as nextCookies } from "next/headers";
+import { cookies, cookies as nextCookies } from "next/headers";
 import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { parseToken, User } from "@niledatabase/server";
 
-export async function login(prevState: any, formData: FormData) {
+export type LoginResponse = {
+  message: string;
+  user?: User;
+};
+export async function login(
+  prevState: LoginResponse | null,
+  formData: FormData
+): Promise<LoginResponse> {
   const email = formData.get("email");
   const password = formData.get("password");
   if (
@@ -26,9 +33,10 @@ export async function login(prevState: any, formData: FormData) {
     true
   );
 
-  // Login and get Set-Cookie from Nile
-  if (!nileResponse || !(nileResponse instanceof Response)) {
-    throw new Error("Invalid response from Nile");
+  if (!nileResponse.ok) {
+    // need to also set these cookies automatically in the extension
+    await nile.auth.signOut();
+    return { message: await nileResponse.clone().text() };
   }
 
   const token = parseToken(nileResponse.headers);

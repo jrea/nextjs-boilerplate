@@ -12,10 +12,9 @@ import {
 import "@niledatabase/react/styles.css";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
-import { login } from "./loginAction";
+import { login, LoginResponse } from "./loginAction";
 import { useActionState } from "react";
-import Link from "next/link";
-import { SignOutButton, UserInfo } from "@niledatabase/react";
+import { UserInfo } from "@niledatabase/react";
 import { User } from "@niledatabase/server";
 
 export default function CustomLoginForm({ user }: { user: void | User }) {
@@ -25,16 +24,16 @@ export default function CustomLoginForm({ user }: { user: void | User }) {
       password: "guy@guy.com",
     },
   });
-  const [state, formAction, pending] = useActionState(login, {
-    message: "",
-    user,
-  });
+  const [state, formAction, pending] = useActionState<
+    LoginResponse | null,
+    FormData
+  >(login, null);
 
   return (
     <div className="container mx-auto pt-40 flex gap-20 flex-col max-w-3xl">
       <h1 className="text-4xl">Sign in</h1>
       <Form {...form}>
-        {state.user ? <UserInfo user={state?.user} /> : null}
+        {state?.user ? <UserInfo user={state?.user} /> : null}
         <form action={formAction} className="flex flex-col gap-3">
           <FormField
             control={form.control}
@@ -68,11 +67,13 @@ export default function CustomLoginForm({ user }: { user: void | User }) {
               </FormItem>
             )}
           />
-          {state?.message}
-          <div className="flex flex-row gap-2">
-            <Button type="submit" size="lg" disabled={pending}>
-              Sign in
-            </Button>
+          <div className="flex flex-col gap-2">
+            <div className="text-red-500">{state?.message}</div>
+            <div className="flex flex-row gap-2">
+              <Button type="submit" size="lg" disabled={pending}>
+                Sign in
+              </Button>
+            </div>
           </div>
         </form>
       </Form>
